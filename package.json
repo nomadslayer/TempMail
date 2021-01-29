@@ -12,15 +12,15 @@
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/eskai-kun/TempMail.git"
+    "url": "git+https://github.com/nomadslayer/TempMail.git"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/eskai-kun/TempMail/issues"
+    "url": "https://github.com/nomadslayer/TempMail/issues"
   },
-  "homepage": "https://github.com/eskai-kun/TempMail#readme",
+  "homepage": "https://github.com/nomadslayer/TempMail#readme",
   "dependencies": {
     "cors": "^2.8.5",
     "dotenv": "^8.2.0",
