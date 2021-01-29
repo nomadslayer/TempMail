@@ -1,0 +1,73 @@
+scalar Date
+directive @length(min: Int, max: Int) on FIELD_DEFINITION
+
+
+#START DOMAIN
+type Domain{
+   _id: ID
+   status: Boolean!
+   host: String! @length(min: 3, max: 150)
+   created_at: Date!
+   modified_at: Date!
+   last_checked: Date!
+   count_emails: Int!
+}
+input DomainInput {
+   host: String!
+}
+input DomainUpdateInput {
+   status: Boolean
+}
+#END DOMAIN
+
+
+#START MAIL
+type Mail{
+    subject: String!
+    from: String!
+    received_at: Date!
+    content: String!
+}
+#END MAIL
+
+
+#START EMAIL
+type Email{
+    _id: ID,
+    email: String!
+    created_at: Date!
+    remove_at: Date!
+    mails: [Mail]
+}
+
+#END EMAIL
+
+
+
+#START QUERIES
+type Query {
+  "Get a domain"
+  getDomain(id: ID!): Domain
+  "Get many domains"
+  getDomains: [Domain]
+
+  "Get an Email"
+  getEmail(id: ID!): Email
+}
+#END QUERIES
+
+
+
+#START MUTATIONS
+type Mutation {
+  "Create a domain"
+  createDomain(input: DomainInput!): Domain
+  # "Edit a domain"
+  editDomain(domain_id: ID!, input: DomainUpdateInput!): Domain
+
+
+  "Create a Email"
+  createEmail: Email
+
+}
+#END MUTATIONS

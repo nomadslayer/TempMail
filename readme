@@ -1,0 +1,71 @@
+This is a temporary email which is mainly used for testing automation. The goal is to make this something similar to 10minutemail but hosted locally 
+It can generate temporary email address meant to be used and discard. It can also received email
+
+1. In command prompt run,  
+docker build -t tempmail .
+
+2. Then run
+docker-compose up -d
+
+To use postman to generate email, first generate a domain
+http://localhost/v1/domainchecker (POST), select graphQL
+
+mutation {
+   createDomain(
+       input: {
+          host: "test.com"
+       }
+       )
+       {
+         _id
+         host
+         count_emails
+       }
+}
+
+Then copy the domain_id, then change the status of the domain to true
+
+mutation {
+   editDomain(
+       domain_id: "60128810330e300014f419ad", 
+       input:{ 
+           status: true
+           }
+        )
+       {
+         _id
+         status
+         host
+         created_at
+         count_emails
+       }
+}
+
+Then generate email
+mutation {
+    createEmail
+        {
+            _id
+            email
+            created_at
+        }
+}
+
+sample response would be like This{
+    "data": {
+        "createEmail": {
+            "_id": "60128879330e300014f419ae",
+            "email": "hulbig-dyann38@test2.com",
+            "created_at": "2021-01-28T09:48:41.832Z"
+        }
+    }
+}
+
+You can then fire an email either by using telnet or using any to send to localhost port 25
+
+How to send email using telnet
+https://docs.microsoft.com/en-us/exchange/mail-flow/test-smtp-with-telnet?view=exchserver-2019
+
+
+Pending work:
+1. API to retrieve the email list being sent. 
